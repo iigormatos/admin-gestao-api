@@ -3,7 +3,8 @@
     public enum RoleEnum : ushort
     {
         Admin = 0,
-        Cliente = 1,
-        Paciente = 2
+        Usuario = 1,
+        Profissional = 2,
+        Cliente = 3
     }
 }

@@ -66,9 +66,9 @@ namespace AdminGestaoApi.ApplicationService.Services.Usuario
 
             var usuarioBuscado = await _usuarioService.GetByUsername(conexao, username);
 
-            if (usuarioBuscado is null)
+            if (usuarioBuscado is null || !usuarioBuscado.IsAtivo || !usuarioBuscado.IsUsuario)
             {
-                _loggingProvider.Erro(new LogDto("UsuarioApplicationService.Login - Usuário não encontrado."));
+                _loggingProvider.Erro(new LogDto("UsuarioApplicationService.Login - Usuário não encontrado, inativado ou não é permitido login."));
                 return default;
             }
 
@@ -153,6 +153,9 @@ namespace AdminGestaoApi.ApplicationService.Services.Usuario
             usuario.Password = PasswordHasher.HashPassword(usuario.NewPassword);
             var usuarioEntity = _mapper.Map<UsuarioEntity>(usuario);
             usuarioEntity.Id = usuarioBuscado.Id;
+
+            if(string.IsNullOrEmpty(usuario.NewPassword))
+                usuarioEntity.Password = usuario.Password;
 
             var usuarioAtualizado = await _usuarioService.Update(conexao, usuarioEntity);
 

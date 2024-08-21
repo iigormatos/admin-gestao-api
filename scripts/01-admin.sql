@@ -8,10 +8,15 @@ CREATE TABLE usuario (
 	username VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-	role INT NOT NULL
+	role INT NOT NULL,
+	is_ativo BOOLEAN NOT NULL,
+	is_usuario BOOLEAN NOT NULL,
+	celular VARCHAR(14),
+	rede_social VARCHAR(255)
 );
 
 /*INSERTS*/
-INSERT INTO usuario (nome, username, email, password, role) VALUES('Igor Matos','iigormatos','igormatos.andrade@hotmail.com','$2a$11$0NRDY40LaH6uW/vCLfH.G.9x5GUnCo66zpGsSm2FRGYEAoOP8rr8O', 0);
-/*INSERT INTO usuario (nome, username, email, password, role) VALUES('Igor Matos','iigormatos','igormatos.andrade@hotmail.com','$2a$11$qmjt5hlpLMJiOoKrLNcj6Otd0Azu875nkdCoHMmtalU0QF3GIt.By', 1);
-INSERT INTO usuario (nome, username, email, password, role) VALUES('Igor Matos','iigormatos','igormatos.andrade@hotmail.com','$2a$11$qmjt5hlpLMJiOoKrLNcj6Otd0Azu875nkdCoHMmtalU0QF3GIt.By', 2);*/
+INSERT INTO usuario (nome, username, email, password, role, is_ativo, is_usuario) VALUES('Igor Matos','igor','igormatos.andrade@hotmail.com','$2a$11$0NRDY40LaH6uW/vCLfH.G.9x5GUnCo66zpGsSm2FRGYEAoOP8rr8O', 0, 1, 1);
+INSERT INTO usuario (nome, username, email, password, role, is_ativo, is_usuario) VALUES('Angela Amancio','angela','angela.silvaamancio@hotmail.com','$2a$11$0NRDY40LaH6uW/vCLfH.G.9x5GUnCo66zpGsSm2FRGYEAoOP8rr8O', 1, 1, 1);
+INSERT INTO usuario (nome, username, email, password, role, is_ativo, is_usuario) VALUES('Maria','maria','maria@hotmail.com','$2a$11$0NRDY40LaH6uW/vCLfH.G.9x5GUnCo66zpGsSm2FRGYEAoOP8rr8O', 2, 1, 1);
+INSERT INTO usuario (nome, username, email, password, role, is_ativo, is_usuario) VALUES('João','joao','joao@hotmail.com','$2a$11$0NRDY40LaH6uW/vCLfH.G.9x5GUnCo66zpGsSm2FRGYEAoOP8rr8O', 3, 1, 1);

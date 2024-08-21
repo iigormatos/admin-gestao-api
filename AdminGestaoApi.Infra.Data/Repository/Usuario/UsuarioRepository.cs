@@ -1,8 +1,8 @@
 ﻿using Dapper;
 using System.Data;
 using AdminGestaoApi.Domain.Entity.Usuario;
-using AdminGestaoApi.Domain.Services.Interfaces.Usuario;
 using AdminGestaoApi.Infra.Data.Repository.Interfaces;
+using AdminGestaoApi.Domain.Services.Interfaces.Usuario;
 
 namespace AdminGestaoApi.Infra.Data.Repository.Usuario
 {
@@ -17,7 +17,7 @@ namespace AdminGestaoApi.Infra.Data.Repository.Usuario
 
         public async Task<UsuarioEntity?> Insert(IDbConnection conexao, UsuarioEntity usuario)
         {
-            var query = $@"INSERT INTO {_mySqlRepository.ObterOwnerMySql()}.usuario (nome,username,email,password_hash) VALUES(@Nome,@Username,@Email,@Password);
+            var query = $@"INSERT INTO {_mySqlRepository.ObterOwnerMySql()}.usuario (nome, username, email, password, role, is_ativo, is_usuario, celular, rede_social, endereco, cidade, estado) VALUES(@Nome, @Username, @Email, @Password, @Role, @IsAtivo, @IsUsuario, @Celular, @RedeSocial, @Endereco, @Cidade, @Estado);
                            SELECT LAST_INSERT_ID()";
 
             usuario.Id = await _mySqlRepository.InserirRegistro<int>(conexao, query, usuario);
@@ -40,7 +40,7 @@ namespace AdminGestaoApi.Infra.Data.Repository.Usuario
 
             var parameters = new DynamicParameters(dictionary);
 
-            var query = $@"SELECT id,nome,username,password,email FROM {_mySqlRepository.ObterOwnerMySql()}.usuario
+            var query = $@"SELECT id, nome, username, password, email, role, is_ativo, is_usuario, celular, rede_social, endereco, cidade, estado FROM {_mySqlRepository.ObterOwnerMySql()}.usuario
                         WHERE username = @username;";
 
             return await _mySqlRepository.ObterRegistro<UsuarioEntity>(conexao, query, parameters);
@@ -65,7 +65,19 @@ namespace AdminGestaoApi.Infra.Data.Repository.Usuario
 
         public async Task<UsuarioEntity?> Update(IDbConnection conexao, UsuarioEntity usuario)
         {
-            var query = $@"UPDATE {_mySqlRepository.ObterOwnerMySql()}.usuario SET nome = @Nome, username = @Username, password = @Password, email = @Email WHERE id = @Id;";
+            var query = $@"UPDATE {_mySqlRepository.ObterOwnerMySql()}.usuario SET nome = @Nome, 
+                                                                                   username = @Username, 
+                                                                                   password = @Password,
+                                                                                   email = @Email,
+                                                                                   role = @Role, 
+                                                                                   is_ativo = @IsAtivo,
+                                                                                   is_usuario = @IsUsuario, 
+                                                                                   celular = @Celular,
+                                                                                   rede_social = @RedeSocial,
+                                                                                   endereco = @Endereco,
+                                                                                   cidade = @Cidade,
+                                                                                   estado = @Estado
+                                                                                   WHERE id = @Id;";
 
             if (await _mySqlRepository.UpdateRegistro(conexao, query, usuario) > 0)
                 return usuario;

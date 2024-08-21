@@ -10,7 +10,5 @@ namespace AdminGestaoApi.ApplicationService.Requests.Usuario
 
         [Required(ErrorMessage = "O campo Password é obrigatório.")]
         public string? Password { get; set; }
-
-        public RoleEnum Role { get; set; }
     }
 }
