@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AdminGestaoApi.Infra.CrossCutting.Logging\AdminGestaoApi.Infra.CrossCutting.Logging.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -8,7 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.3" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AdminGestaoApi.Infra.CrossCutting.IoC\AdminGestaoApi.Infra.CrossCutting.IoC.csproj" />
+    <ProjectReference Include="..\AdminGestaoApi.Infra.CrossCutting.Logging\AdminGestaoApi.Infra.CrossCutting.Logging.csproj" />
   </ItemGroup>
 
 </Project>

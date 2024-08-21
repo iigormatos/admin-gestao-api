@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./scripts/01-admin.sql:/docker-entrypoint-initdb.d/01-admin.sql
+      - ./scripts/02-grant-permissions.sql:/docker-entrypoint-initdb.d/05-grant-permissions.sql
+
+volumes:
+  mysql_data:
